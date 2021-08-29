@@ -1,206 +1,74 @@
 body {
+    background-color: #f5f5df;
+}
+
+h1 {
+    color: #664229;
+}
+
+.uploadBar {
+    display: flex;
+    min-height: 20vh;
+    width: 100%;
     padding: 0;
-    margin: 0;
-    background: #EBEBEB;
-    padding-bottom: 50px;
+    margin-top: 6vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.navbar {
-    background: #1f2833;
+#uploader {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50%;
+    margin-bottom: 2vh;
+    color: blue;
 }
 
-.nav-link,
-.navbar-brand {
-    color: #fff;
-    cursor: pointer;
+h1 {
+    text-align: center;
+}
+
+.heading {
+    margin-top: 6vh;
+    font-size: 8vh;
+}
+
+.subheading {
+    margin-top: 2vh;
+    font-size: 2.3vh;
+
 }
 
 .nav-link {
-    margin-right: 1em !important;
+    padding-left: 2.25vw;
+    padding-right: 2.25vw;
+    size: 100%;
 }
 
-.nav-link:hover {
-    color: #000;
+.nav-link-right {
+    padding-left: 2.25vw;
+    padding-right: 2.25vw;
+    margin-right: 4vw;
+    size: 100%;
 }
 
-.navbar-collapse {
-    justify-content: flex-end;
-}
-
-.header {
-    background-size: cover;
-    background-position: center;
-    position: relative;
-}
-
-.overlay {
-    position: absolute;
-    min-height: 100%;
-    min-width: 100%;
-    left: 0;
-    top: 0;
-    background: rgba(30, 30, 30, 0.5);
-}
-
-.description {
-    left: 50%;  
-    position: absolute;
-    top: 45%;
-    transform: translate(-50%, -55%);
+#imageUploadHeading {
     text-align: center;
 }
 
-.description h1 {
-    color: #fff;
-}
+#fileButton {}
 
-.description p {
-    color: #fff;
-    font-size: 1.3rem;
-    line-height: 1.5;
-}
-
-.description button {
-    border:1px solid black;
-    background:#1f2833;
-    border-radius: 0;
-    color:#efecec;
-}
-
-.description button:hover {
-    border:1px solid #e6e5e5;
-    background:#dddada;
-    color:#1c1c1c;
-}
-
-.fadein {
-  background-image: linear-gradient(top, #1f2833, #EBEBEB);
-  background-image: -moz-linear-gradient(top, #1f2833, #EBEBEB);
-  background-image: -o-linear-gradient(top, #1f2833, #EBEBEB);
-  background-image: -webkit-linear-gradient(top, #1f2833, #EBEBEB);
-  height: 50px;
-  opacity: 0.8;
-}
-
-.logo {
-  height: 30px;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.pageBody {
-  background-color: rgba(30, 30, 30, 0.5);
-  text-align: center;
-}
-
-.storageDiv {
-  display: flex;
-  background-color: #EBEBEB;
-  width: 100%;
-  border-radius: 10px;
-  flex-wrap: wrap;
-  padding: 10px 20px;
-  margin-top: 10%;
-}
-
-img {
-  max-width: 100%;
-}
-
-.displayImg {
-  object-fit: cover;
-  object-position: 50% 50%;
-  height: 200px;
-  width: 100%;
-}
-
-.row2 {
-  justify-content: space-evenly;
-}
-body {
-    background: #fff;
-    padding: 0px;
-    margin: 0px; 
-    font-size: 16px;
-}
-input, button {
-    font-weight: 700;
-}
-.main-div {
-    width: 23%;
-    margin: 0px auto;
-    margin-top: 150px;
-    padding: 20px;
-    text-align: center; 
-} 
-.loggedin-div-button {
-    position: fixed;
-    bottom: 0;
-    width: 18%;
-    padding: 1%;
-    margin-left: 80%;
-}
-.loggedin-div-text {
-    text-align: center;
-}
-.main-div input {
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background: #fff;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    object-position: center;
-    outline: none;
-    width: 97%;
-    margin-bottom: 10px;
-    transition: 0.3s;
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-    padding-left: 2%;
-}
-.main-div input:focus {
-    border: 1px solid #777;
-}
-.main-div button, .loggedin-div-button button {
-    background: #5d8ffc;
-    color: #fff;
-    border: 0px;
-    border-radius: 5px;
-    padding: 15px;
-    display: block;
+.upload_group {
+    display: flex;
+    min-height: 40vh;
     width: 100%;
-    transition: 0.3s;
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
+    height: 25%;
+    padding: 0px;
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
-.main-div button:hover, .loggedin-div-button button:hover {
-    background: #fff;
-    color: #5d8ffc;
-    border: 1px solid #5d8ffc;
-    cursor: pointer;
-    
-}
-.plus {
-    width: 75px;
-    height: 75px;
-    position: fixed;
-    bottom: 0;
-    margin-left: 11px;
-    margin-bottom: 22px;
-}
-.create {
-    position: fixed;
-    bottom: 0;
-    margin-left: 15px;
-    margin-bottom: 8px;
-}
-.logout {
-  color: white;
-  text-decoration: none;
-}
-.welcome {
-  margin-top: 4%;
-}
+
+
