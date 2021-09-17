@@ -1,17 +1,17 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gluten:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
-
-    <title>Pixelect</title>
+    <title>Upload Images</title>
 </head>
+
 
 <body>
 
@@ -24,19 +24,13 @@
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li class="logged-in">
-                    <a href="uploadImages.html" class="navlink"><strong>Upload Images</strong></a>
+                    <a href="index.html" class="navlink"><strong>Home</strong></a>
                 </li>
                 <li class="logged-in">
                     <a href="#" class="navlink modal-trigger" data-target="modal-account"><strong>Account</strong></a>
                 </li>
                 <li class="logged-in">
                     <a href="#" class="navlink" id="logout"><strong>Logout</strong></a>
-                </li>
-                <li class="logged-out">
-                    <a href="#" class="navlink modal-trigger" data-target="modal-login"><strong>Login</strong></a>
-                </li>
-                <li class="logged-out">
-                    <a href="#" class="navlink modal-trigger" data-target="modal-signup"><strong>Sign Up</strong></a>
                 </li>
             </ul>
         </div>
@@ -85,62 +79,33 @@
             <div class="account-details"></div>
         </div>
     </div>
-    
-    
+
+
     <!-- HEADING -->
     <div class="heading">
-        <h1>Welcome To</h1>
-        <h2>PIXELECT</h2>
-    </div>
-
-    
-    <!-- CREATE GUIDE MODAL --
-    <div id="modal-create" class="modal">
-        <div class="modal-content">
-            <h4>Create Guide</h4><br />
-            <form id="create-form">
-                <div class="input-field">
-                    <input type="text" id="title" required>
-                    <label for="title">Guide Title</label>
-                </div>
-                <div class="input-field">
-                    <textarea id="content" class="materialize-textarea" required></textarea>
-                    <label for="content">Guide Content</label>
-                </div>
-                <button class="btn blue lighten-1 z-depth-0">Create</button>
-            </form>
-        </div>
-    </div>
-
-    -->
-
-    <!-- GUIDE LIST --
-    <div class="container" style="margin-top: 40px;">
-        <ul class="collapsible z-depth-0 guides" style="border: none;">
-            <li>
-                <div class="collapsible-header grey lighten-4">Guide title</div>
-                <div class="collapsible-body white">Lorem ipsum dolor sit amet.</div>
-            </li>
-            <li>
-                <div class="collapsible-header grey lighten-4">Guide title</div>
-                <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
-            <li>
-                <div class="collapsible-header grey lighten-4">Guide title</div>
-                <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
-            <li>
-                <div class="collapsible-header grey lighten-4">Guide title</div>
-                <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
-        </ul>
+        <h3>Upload Images</h3>
     </div>
 
 
-    -->
+    <div class="userdetails">
+        <div id="divmyUser"></div>
+    </div>
 
 
+    <div class="upload_group">
 
+        <progress value="0" max="100" id="uploader" style="width: 400px;">0%</progress>
+        <input type="file" value="upload" id="fileButton">
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
@@ -159,20 +124,75 @@
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
 
-        // Firebase References
-        const auth = firebase.auth();
-        const db = firebase.firestore();
+        // START OF UPLOAD IMAGES
 
-        // Update Firestore Settings
-        db.settings({
-            timestampsInSnapshots: true
+        // this is to get elements
+        var uploader = document.getElementById('uploader');
+        var fileButton = document.getElementById('fileButton');
+        var myUser = document.getElementById('uid');
+
+        // "listen" for file selection
+        fileButton.addEventListener('change', function(e) {
+            //myUser which has the users id code is identifying as a div element which we need to turn back into its original form
+            var identity = divmyUser.innerHTML;
+            // Get the file
+            var file = e.target.files[0];
+            //var identity = document.getElementById('uid');
+            // Create a storage ref to find file again
+
+            //need to set myUser as something before using it here IMPORTANT!!
+            var storageRef = firebase.storage().ref("images/" + identity + file.name); // images/uid/pic.png
+
+            // Upload the file
+            var task = storageRef.put(file);
+
+            // Update the progress bar
+            task.on('state_changed',
+
+                function progress(snapshot) {
+                    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    uploader.value = percentage;
+                },
+                function error(err) {
+                    window.alert('Error');
+                },
+                function complete() {
+                    window.alert('Your File was Succesfully Uploaded!')
+
+                }
+
+            );
+
+            //START OF DISPLAY IMAGES
+
+            //i think this just lists all images, now i need to display them or atleast have a place for the list to freakin go            
+
+            // Create a reference under which you want to list
+            var listRef = storageRef.child('images/' + identity + "/");
+
+            // Find all the prefixes and items.
+            listRef.listAll()
+                .then((res) => {
+                    res.prefixes.forEach((folderRef) => {
+                        // All the prefixes under listRef.
+                        // You may call listAll() recursively on them.
+                    });
+                    res.items.forEach((itemRef) => {
+                        // All the items under listRef.
+                    });
+                }).catch((error) => {
+                    // Uh-oh, an error occurred!
+                    window.alert('Error')
+                });
         });
+        // END OF UPLOAD IMAGES
+
     </script>
-
-
-    <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="scripts/auth.js"></script>
-    <script src="scripts/index.js"></script>
-</body></html>
+    <script src="index.js"></script>
+    <script src="auth.js"></script>
+</body>
+
+</html>

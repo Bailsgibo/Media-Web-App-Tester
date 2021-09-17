@@ -1,33 +1,25 @@
-// listen for auth status changes
+// Listen for auth status changes
 auth.onAuthStateChanged(user => {
-    if (user) {
-        db.collection('boards').onSnapshot(snapshot => {
-            setupBoards(snapshot.docs);
-            setupUI(user);
-        }, err => console.log(err.message));
+    if (user) { // If user returns a value - "user" is all the info
+        console.log('User logged in: ', user); // Prints user info to console
         var uid = user.uid;
-        var user = firebase.auth().currentUser;
-        document.getElementById("divmyUser").innerHTML = user.uid;
-    } else {
-        //signed out
+    } else { // If user is null
+        console.log('User logged out');
     }
-});
+})
 
-// signup
+// Signup
 const signupForm = document.querySelector('#signup-form');
 signupForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevents auto-refresh
 
-    // get user info
+    // Get user info - Takes the inputted email and password assigns them to constant variables
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
 
-    // sign up the user & add firestore data
+    // Sign up the user
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
-        return db.collection('users').doc(cred.user.uid).set({
-            bio: signupForm['signup-bio'].value
-        });
-    }).then(() => {
+        console.log(cred.user);
         // close the signup modal & reset form
         const modal = document.querySelector('#modal-signup');
         M.Modal.getInstance(modal).close();
@@ -35,24 +27,23 @@ signupForm.addEventListener('submit', (e) => {
     });
 });
 
-// logout
+// Logout
 const logout = document.querySelector('#logout');
 logout.addEventListener('click', (e) => {
     e.preventDefault();
     auth.signOut();
 });
 
-// login
+// Login
 const loginForm = document.querySelector('#login-form');
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // get user info
+    // Get user info
     const email = loginForm['login-email'].value;
     const password = loginForm['login-password'].value;
-    const bio = signupForm['signup-bio'].value;
 
-    // log the user in
+    // Log the user in
     auth.signInWithEmailAndPassword(email, password).then((cred) => {
         // close the signup modal & reset form
         const modal = document.querySelector('#modal-login');
