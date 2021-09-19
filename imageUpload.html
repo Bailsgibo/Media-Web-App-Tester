@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 
-    <title>Pixelect</title>
+    <title>Pixelect Upload</title>
 </head>
 
 <body>
@@ -29,11 +29,11 @@
                 </div>
 
                 <li>
-                    <a href="create.html">Create Board</a>
+                    <a href="index.html">Home</a>
                 </li>
                 <li>
-                    <a href="imageUpload.html">Upload Images</a>
-                </li>                
+                    <a href="create.html">Create Board</a>
+                </li>
                 <li>
                     <a href="#" class="modal-trigger" data-target="modal-account">Account</a>
                 </li>
@@ -61,13 +61,10 @@
     <div class="about">
         <div class="content">
             <div class="title">Pixelect</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo impedit atque consequatur! Iusto distinctio temporibus repellendus labore odit adipisci harum ipsa beatae natus, eum eius, hic aperiam odio! Quasi molestias magnam illo voluptatem iusto ipsam blanditiis, tempore cumque reiciendis quaerat vero tenetur, sequi dolores libero voluptas vitae voluptate placeat dolorum modi ipsa nisi repellat facilis aliquam asperiores. Aut nam repellat harum quas saepe dolorum voluptates ratione, itaque consectetur explicabo a facilis rem mollitia maxime repudiandae fuga reprehenderit, odio cum incidunt labore molestiae quis non perferendis ipsam. Illum, in, deserunt. Ipsa.</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo impedit atque consequatur! Iusto distinctio temporibus repellendus labore odit adipisci harum ipsa beatae natus, eum eius, hic aperiam odio! Quasi molestias magnam illo voluptatem iusto ipsam blanditiis, tempore cumque reiciendis quaerat vero tenetur, sequi dolores libero voluptas vitae voluptate placeat dolorum modi ipsa nisi repellat facilis aliquam asperiores. Aut nam repellat harum quas saepe dolorum voluptates ratione, itaque consectetur explicabo a facilis rem mollitia maxime repudiandae fuga reprehenderit, odio cum incidunt labore molestiae quis non perferendis ipsam. Illum, in, deserunt. Ipsa.</p><br>
             <div class="title">Examples</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo impedit atque consequatur! Iusto distinctio temporibus repellendus labore odit adipisci harum ipsa beatae natus, eum eius, hic aperiam odio! Quasi molestias magnam illo voluptatem iusto ipsam blanditiis, tempore cumque reiciendis quaerat vero tenetur, sequi dolores libero voluptas vitae voluptate placeat dolorum modi ipsa nisi repellat facilis aliquam asperiores. Aut nam repellat harum quas saepe dolorum voluptates ratione, itaque consectetur explicabo a facilis rem mollitia maxime repudiandae fuga reprehenderit, odio cum incidunt labore molestiae quis non perferendis ipsam. Illum, in, deserunt. Ipsa.</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo impedit atque consequatur! Iusto distinctio temporibus repellendus labore odit adipisci harum ipsa beatae natus, eum eius, hic aperiam odio! Quasi molestias magnam illo voluptatem iusto ipsam blanditiis, tempore cumque reiciendis quaerat vero tenetur, sequi dolores libero voluptas vitae voluptate placeat dolorum modi ipsa nisi repellat facilis aliquam asperiores. Aut nam repellat harum quas saepe dolorum voluptates ratione, itaque consectetur explicabo a facilis rem mollitia maxime repudiandae fuga reprehenderit, odio cum incidunt labore molestiae quis non perferendis ipsam. Illum, in, deserunt. Ipsa.</p><br>
             <div class="title">Other Info</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo impedit atque consequatur! Iusto distinctio temporibus repellendus labore odit adipisci harum ipsa beatae natus, eum eius, hic aperiam odio! Quasi molestias magnam illo voluptatem iusto ipsam blanditiis, tempore cumque reiciendis quaerat vero tenetur, sequi dolores libero voluptas vitae voluptate placeat dolorum modi ipsa nisi repellat facilis aliquam asperiores. Aut nam repellat harum quas saepe dolorum voluptates ratione, itaque consectetur explicabo a facilis rem mollitia maxime repudiandae fuga reprehenderit, odio cum incidunt labore molestiae quis non perferendis ipsam. Illum, in, deserunt. Ipsa.</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo impedit atque consequatur! Iusto distinctio temporibus repellendus labore odit adipisci harum ipsa beatae natus, eum eius, hic aperiam odio! Quasi molestias magnam illo voluptatem iusto ipsam blanditiis, tempore cumque reiciendis quaerat vero tenetur, sequi dolores libero voluptas vitae voluptate placeat dolorum modi ipsa nisi repellat facilis aliquam asperiores. Aut nam repellat harum quas saepe dolorum voluptates ratione, itaque consectetur explicabo a facilis rem mollitia maxime repudiandae fuga reprehenderit, odio cum incidunt labore molestiae quis non perferendis ipsam. Illum, in, deserunt. Ipsa.</p>
         </div>
     </div>
@@ -95,13 +92,29 @@
         window.onscroll = () => {
             this.scrollY > 10 ? navbar.classList.add("sticky") : navbar.classList.remove("sticky");
         }
-        
+
     </script>
 
+    <div class="upload_group">
+
+        <progress value="0" max="100" id="uploader" style="width: 400px;">0%</progress>
+        <input type="file" value="upload" id="fileButton">
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+
 
     <script>
         const firebaseConfig = {
@@ -116,20 +129,80 @@
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
 
-        // Firebase References
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // Update Firestore Settings
-        db.settings({
-            timestampsInSnapshots: true
-        });
-    </script>
+        auth.onAuthStateChanged(user => {
+            if (user) { // If user returns a value - "user" is all the info
+                var uid = user.uid;
+                getUID();
 
+                // START OF UPLOAD IMAGES
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="scripts/index.js"></script>
+                // this is to get elements
+                var uploader = document.getElementById('uploader');
+                var fileButton = document.getElementById('fileButton');
 
-</body></html>
+                // "listen" for file selection
+                fileButton.addEventListener('change', function(e) {
+                    //myUser which has the users id code is identifying as a div element which we need to turn back into its original form
+                    var identity = divmyUser.innerHTML;
+                    // Get the file
+                    var file = e.target.files[0];
+                    //var identity = document.getElementById('uid');
+                    // Create a storage ref to find file again
+
+                    //need to set myUser as something before using it here IMPORTANT!!
+                    var storageRef = firebase.storage().ref(`images/${user.uid}/${file.name}`); // images/uid/pic.png
+
+                    // Upload the file
+                    var task = storageRef.put(file);
+
+                    // Update the progress bar
+                    task.on('state_changed',
+
+                        function progress(snapshot) {
+                            var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            uploader.value = percentage;
+                        },
+                        function error(err) {
+                            window.alert('Error');
+                        },
+                        function complete() {
+                            window.alert('Your File was Succesfully Uploaded!')
+
+                        }
+
+                    );
+
+                    //START OF DISPLAY IMAGES
+
+                    //i think this just lists all images, now i need to display them or atleast have a place for the list to freakin go            
+
+                    // Create a reference under which you want to list
+                    var listRef = storageRef.child('images/' + identity + "/");
+
+                    // Find all the prefixes and items.
+                    listRef.listAll()
+                        .then((res) => {
+                            res.prefixes.forEach((folderRef) => {
+                                // All the prefixes under listRef.
+                                // You may call listAll() recursively on them.
+                            });
+                            res.items.forEach((itemRef) => {
+                                // All the items under listRef.
+                            });
+                        }).catch((error) => {
+                            // Uh-oh, an error occurred!
+                            window.alert('Error')
+                        });
+                });
+            }
+        })
+        // END OF UPLOAD IMAGES
+
+</body>
+
+</html>
