@@ -11,14 +11,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gluten:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="main.css">
 
 
-    <title>Pixelect Upload</title>
+    <title>Pixelect</title>
 </head>
 
 <body>
+
     <!-- NAVBAR -->
     <nav class="navbar z-depth-0">
         <div class="content">
@@ -29,9 +30,7 @@
                 <div class="icon cancel-btn">
                     <i class="fas fa-times"></i>
                 </div>
-                <li>
-                    <a href="home.html">Home</a>
-                </li>
+
                 <li>
                     <a href="#" class="dropDown">Create Board</a>
                     <div class="options">
@@ -41,6 +40,9 @@
                             </li>
                             <li>
                                 <a href="edit.html" style="font-size: 13px; margin: 0; width: 150px; text-align: center;">Edit Existing Board</a>
+                            </li>
+                            <li>
+                                <a href="upload.html" style="font-size: 13px; margin: 0; width: 150px; text-align: center;">Upload Images</a>
                             </li>
                         </ul>
                     </div>
@@ -136,24 +138,10 @@
         }
     </script>
 
-    <div class="upload_group">
-        <progress value="0" max="100" id="uploader" style="width: 400px;">0%</progress>
-        <input type="file" value="upload" id="fileButton">
-    </div>
-
-    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
-
 
     <script>
         const firebaseConfig = {
@@ -177,49 +165,11 @@
         db.settings({
             timestampsInSnapshots: true
         });
-
-        auth.onAuthStateChanged(user => {
-            if (user) { // If user returns a value - "user" is all the info
-                var uid = user.uid;
-                getUID();
-
-                // START OF UPLOAD IMAGES
-
-                // this is to get elements
-                var uploader = document.getElementById('uploader');
-                var fileButton = document.getElementById('fileButton');
-
-                // "listen" for file selection
-                fileButton.addEventListener('change', function(e) {
-                    // Get the file
-                    var file = e.target.files[0];
-                    //var identity = document.getElementById('uid');
-                    // Create a storage ref to find file again
-
-                    //need to set myUser as something before using it here IMPORTANT!!
-                    var storageRef = firebase.storage().ref(`images/${user.uid}/${file.name}`); // images/uid/pic.png
-
-                    // Upload the file
-                    var task = storageRef.put(file);
-
-                    // Update the progress bar
-                    task.on('state_changed',
-
-                        function progress(snapshot) {
-                            var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                            uploader.value = percentage;
-                        },
-                        function error(err) {
-                            window.alert('Error');
-                        },
-                        function complete() {
-                            window.alert('Your File was Succesfully Uploaded!')
-                        }
-                    );
-                });
-            }
-        })
     </script>
+
+
+    <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="scripts/index.js"></script>
+
 </body></html>

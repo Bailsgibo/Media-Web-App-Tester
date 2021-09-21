@@ -46,7 +46,7 @@ loginForm.addEventListener('submit', (e) => {
         const modal = document.querySelector('#modal-login');
         M.Modal.getInstance(modal).close();
         loginForm.reset();
-        window.location = 'index.html';
+        window.location = 'home.html';
     });
 
 });
