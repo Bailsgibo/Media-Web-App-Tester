@@ -120,10 +120,11 @@ ul li:hover ul li {
 
 .banner {
     height: 100vh;
-    background: url("img/banner.jpg") no-repeat;
-    background-size: cover;
+    background: url("img/background.jpg") no-repeat;
+    background-size: contain;
     background-position: center;
     background-attachment: fixed;
+    background-color: rgb(1, 1, 2);
 }
 
 .about {
