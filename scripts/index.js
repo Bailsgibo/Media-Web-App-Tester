@@ -85,3 +85,41 @@ function showSlides(n) {
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
 }
+
+
+function displayFolder() {
+
+    $(".imagesClass").empty();
+    var listvariable = document.getElementById('images');
+    //var identity = document.getElementById('divemailMe').value;
+    var identity = firebase.auth().currentUser.uid;
+    //var selectedfolder = folder_options.innerHTML;
+    console.log("identity is " + identity.toString());
+    var listRef = storageRef.child('/images/' + identity + '/'); //would add " + selectedfolder + '/' " if wanted folder selection back
+    console.log("storageRef.child or listRef is : " + listRef.toString());
+
+    //$('#testry').html('');
+    var i = 0;
+
+    listRef.listAll().then(function (result) {
+        result.items.forEach(function (imageRef) {
+            console.log("Image reference: " + imageRef.toString());
+
+            i++;
+            displayImage(i, imageRef, listvariable);
+        });
+    });
+} //end display vision board
+
+function displayImage(row, images, location) { //formats images
+    images.getDownloadURL().then(function (url) {
+        console.log(url);
+
+        let new_html = '';
+        //you dont need these breaks, it just makes everything have the weird stair effect
+        //new_html += '<br>';
+        new_html += '<img src="' + url + '"height = "300px" style="float: center">';
+        //new_html += '<br>';
+        location.innerHTML += new_html;
+    })
+}
